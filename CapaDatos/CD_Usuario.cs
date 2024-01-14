@@ -179,7 +179,7 @@ namespace CapaDatos
                                 usuario = new Usuario()
                                 {
                                     IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
-                                    // Completa con el resto de las propiedades...
+                                   
                                 };
                             }
                         }

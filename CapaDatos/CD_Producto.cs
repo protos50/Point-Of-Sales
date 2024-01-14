@@ -57,7 +57,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Producto>();
                 }
             }
@@ -92,7 +92,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -129,7 +129,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -176,12 +176,12 @@ namespace CapaDatos
                         }
                     }
 
-                    // Si no se encuentra el producto, puedes devolver null o manejarlo de otra forma.
+                    
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return null;
                 }
             }
@@ -233,7 +233,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -279,12 +279,12 @@ namespace CapaDatos
                         }
                     }
 
-                    // Si no se encuentra el producto, puedes devolver null o manejarlo de otra forma.
+                   
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return null;
                 }
             }
@@ -329,7 +329,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí (puedes registrar la excepción o lanzar una excepción personalizada)
+                   
                     return new List<Producto>();
                 }
             }

@@ -42,18 +42,20 @@ namespace CapaPresentacion
 
         private void verificarCheck()
         {
-            
+            //si el carrito tiene elementos podemos comprar
             if (carrito.Count > 0)
             {
-
                 btnConfirmarCompra.Enabled = true;
                 btnConfirmarCompra.BackColor = Color.Green;
             }
+
             else
             {
                 btnConfirmarCompra.Enabled = false;
                 btnConfirmarCompra.BackColor = SystemColors.Control;
             }
+
+            //hace que btn verificar solo este habilitado
             iconButton2.Enabled = true;
             iconButton2.BackColor = Color.ForestGreen;
             btnCarrito.BackColor = SystemColors.Control;
@@ -70,9 +72,11 @@ namespace CapaPresentacion
 
         private void verificado()
         {
+            //se desactiva el verificar una vez verificado.
             iconButton2.Enabled = false;
             iconButton2.BackColor = SystemColors.Control;
             btnCarrito.BackColor = Color.MediumTurquoise;
+
             btnCarrito.Enabled = true;
             aviso.Visible = false;
             txtNombree.Enabled = true;
@@ -86,11 +90,14 @@ namespace CapaPresentacion
         }
 
 
-
+        //al cargar el form
         private void frmCompras_Load(object sender, EventArgs e)
         {
+            //la fecha se carga a la acutal
             dtpFecha.Value = DateTime.Now; 
 
+
+            
             cboEstadoo.Items.Add(new OpcionCombo() { Valor = 1, Texto = "Activo" });
             cboEstadoo.Items.Add(new OpcionCombo() { Valor = 0, Texto = "Inactivo" });      
             cboEstadoo.DisplayMember = "Texto";
@@ -98,30 +105,43 @@ namespace CapaPresentacion
             cboEstadoo.SelectedIndex = 0;
 
 
+            //obtenemos los proveedores y agregamos al cboProveedor, guardamos id y nombre
             List<Proveedor> listaProveedor = new CN_Proveedor().ObtenerProveedores();
             foreach (var item in listaProveedor)
             {
-                cboProveedor.Items.Add(new OpcionCombo() { Valor = item.IdProveedor, Texto = item.Nombre });
+                if (item.Estado != false)
+                {
+                    cboProveedor.Items.Add(new OpcionCombo() { Valor = item.IdProveedor, Texto = item.Nombre });
+                }
+                    
             }
             cboProveedor.DisplayMember = "Texto";
             cboProveedor.ValueMember = "Valor"; 
             cboProveedor.SelectedIndex = 0;
 
            
+            //obtenemos las categorias y guardamos id y nombre
             List<Categoria> listaCategoria = new CN_Categoria().ObtenerCategorias();
             foreach (var item in listaCategoria)
             {
-                cboCategoria.Items.Add(new OpcionCombo() { Valor = item.IdCategoria, Texto = item.Descripcion });
-            }        
+                if (item.estado != false)
+                {
+                    cboCategoria.Items.Add(new OpcionCombo() { Valor = item.IdCategoria, Texto = item.Descripcion });
+                }                                      
+            }   
+            
             cboCategoria.DisplayMember = "Texto";
             cboCategoria.ValueMember = "Valor";           
             cboCategoria.SelectedIndex = 0;
         }
 
+
+
+
         //boton agregar carrito
         private void btnCarrito_Click(object sender, EventArgs e)
         {
-
+            //Verificamos que se ingresen los datos
             if (string.IsNullOrWhiteSpace(txtCodigoBarra.Text) ||
                 string.IsNullOrWhiteSpace(txtNombree.Text) ||
                 string.IsNullOrWhiteSpace(txtDesc.Text) ||
@@ -133,8 +153,10 @@ namespace CapaPresentacion
                 return; // Sale del método si algún campo de texto está vacío
             }
 
+            //Una vez agregado volvemos a desabilitar los botones y habilitamos solo verificar
             verificarCheck();
 
+            //Creamos un producto con los datos de los textBox
             Producto nuevoProducto = new Producto
             {
                 codigoProducto = txtCodigoBarra.Text,
@@ -152,6 +174,8 @@ namespace CapaPresentacion
             carrito.Add(nuevoProducto);
             MessageBox.Show("Producto agregado al carrito. Total de productos en el carrito: " + carrito.Count);
 
+
+            //Si hay mas de un producto en el carrito podemos comprar
             if (carrito.Count > 0)
             {
                 btnConfirmarCompra.BackColor = Color.ForestGreen;
@@ -160,6 +184,7 @@ namespace CapaPresentacion
 
             CN_Producto negocioProducto = new CN_Producto();
 
+            //Si el producto no existe hacemos la insercion
             if (txtCodigoBarra.Enabled)
             {
                 if (negocioProducto.AgregarProducto(nuevoProducto))
@@ -168,6 +193,8 @@ namespace CapaPresentacion
                     ActualizarDataGridView(carrito);
                 }
             }
+
+            //Si existe, actualizamos su stock y su precio de compra
             else
             {
                 int idProducto = int.Parse(txtId.Text);
@@ -189,6 +216,7 @@ namespace CapaPresentacion
             limpar();
         }
 
+        //Carga los productos al carrito
         private void ActualizarDataGridView(List<Producto> productos)
         {
             dgvData.Rows.Clear();
@@ -206,11 +234,16 @@ namespace CapaPresentacion
             }
         }
 
+
         private void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
-           
+            // Obtenemos el id del proveedor a través del item valor del combobox
             int idProveedor = Convert.ToInt32(((OpcionCombo)cboProveedor.SelectedItem).Valor);
+
+            // Calculamos el monto total del carrito de compras
             decimal montoTotal = CalcularMontoTotalDelCarrito();
+
+            // Creamos un objeto compra con los datos del usuario actual, proveedor, el monto y la fecha
             Compra nuevoCompra = new Compra
             {
                 oUsuario = new Usuario() { IdUsuario = usuarioActual.IdUsuario },
@@ -219,26 +252,35 @@ namespace CapaPresentacion
                 FechaRegistro = dtpFecha.Value
             };
 
+            // Instanciamos objetos de las clases de negocios
             CN_Compra negocioCompra = new CN_Compra();
             CN_DetalleCompra negocioDetalle = new CN_DetalleCompra();
             CN_Producto negocioProducto = new CN_Producto();
 
+            // Intentamos agregar la compra
             if (negocioCompra.AgregarCompra(nuevoCompra))
             {
+                // Obtenemos el último id de compra registrado
                 int idCompra = negocioCompra.obtenerUltimoIdCompra();
 
+                // Si se obtiene un id válido
                 if (idCompra > 0)
                 {
+                    // Inicializamos listas y obtenemos productos disponibles
                     List<DetalleCompra> detallesCompra = new List<DetalleCompra>();
                     List<Producto> productosDisponibles = negocioProducto.ObtenerProductos();
 
+                    // Iteramos sobre los productos en el carrito
                     foreach (Producto productoEnCarrito in carrito)
                     {
+                        // Buscamos el producto en la base de datos por nombre y descripción
                         Producto productoEnBaseDeDatos = productosDisponibles.FirstOrDefault(p =>
                             p.Nombre == productoEnCarrito.Nombre && p.Descripcion == productoEnCarrito.Descripcion);
 
+                        // Si encontramos el producto en la base de datos
                         if (productoEnBaseDeDatos != null)
                         {
+                            // Creamos un objeto DetalleCompra
                             DetalleCompra detalle = new DetalleCompra
                             {
                                 IdCompra = idCompra,
@@ -250,6 +292,7 @@ namespace CapaPresentacion
                                 FechaRegistro = productoEnCarrito.FechaRegistro
                             };
 
+                            // Intentamos agregar el detalle de compra
                             if (negocioDetalle.AgregarDetalleCompra(detalle))
                             {
                                 detallesCompra.Add(detalle);
@@ -257,14 +300,22 @@ namespace CapaPresentacion
                         }
                     }
 
+                    // Asignamos la lista de detalles de compra al objeto Compra
                     nuevoCompra.DetallesCompra = detallesCompra;
+
+                    // Limpiamos el carrito y actualizamos el DataGridView
                     carrito.Clear();
                     ActualizarDataGridView(carrito);
+
+                    // Mostramos un mensaje de éxito
                     MessageBox.Show("Compra confirmada con éxito.");
+
+                    // Verificamos el estado del checkbox
                     verificarCheck();
                 }
             }
         }
+
 
 
 
@@ -318,10 +369,15 @@ namespace CapaPresentacion
                 return;
             }
             verificado();
+
             CN_Producto negocioProducto = new CN_Producto();
+
             string codigoProducto = txtCodigoBarra.Text;
+
+            //obtenemos un producto por el codigo de barras
             Producto productoCargado = negocioProducto.ObtenerProductoPorCodigoProducto(codigoProducto);
 
+            //Si este existe se rellenan los textBox correspondientes y solo nos permite usar cantidad y precio compra
             if (productoCargado != null)
             {
                 MessageBox.Show("Producto existente");
@@ -337,10 +393,12 @@ namespace CapaPresentacion
                 txtDesc.Enabled = false;
                 txtPrecioVenta.Text = productoCargado.PrecioVenta.ToString();
                 txtPrecioVenta.Enabled = false;
+               
                 cboCategoria.Enabled = false;
                 cboEstadoo.Enabled = false;
 
             }
+            //Si el producto no existe cargamos uno nuevo
             else
             {
                 MessageBox.Show("Producto inexistente, cargue sus datos");

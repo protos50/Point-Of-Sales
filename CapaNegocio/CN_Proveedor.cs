@@ -21,13 +21,13 @@ namespace CapaNegocio
 
         public bool AgregarProveedor(Proveedor proveedor)
         {
-            // Puedes agregar validaciones u otra lógica de negocio aquí antes de llamar al método en la capa de datos.
+           
             return ocd_proveedor.AgregarProveedor(proveedor);
         }
 
         public bool EditarProveedor(Proveedor proveedor)
         {
-            // Puedes agregar validaciones u otra lógica de negocio aquí antes de llamar al método en la capa de datos.
+            
             return ocd_proveedor.EditarProveedor(proveedor);
         }
     }

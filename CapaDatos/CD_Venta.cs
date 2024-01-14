@@ -21,12 +21,7 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    /*
-                    using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente,v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
-                                                           "FROM Venta v " +
-                                                           "INNER JOIN USUARIO u ON v.IdUsuario = u.IdUsuario " +
-                                                           "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente", con))
-                    */
+                    
                     using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.IdUsuario, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente,v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
                                                   "FROM Venta v " +
                                                   "INNER JOIN USUARIO u ON v.IdUsuario = u.IdUsuario " +
@@ -68,7 +63,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Venta>();
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
@@ -102,7 +97,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -131,7 +126,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                 }
             }
 
@@ -183,7 +178,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }
@@ -237,7 +232,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }
@@ -271,7 +266,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }

@@ -143,7 +143,7 @@ namespace CapaPresentacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Validar que se hayan completado los campos necesarios, como la descripción de la categoría
+            // Validar que se hayan completado los campos 
             if (string.IsNullOrWhiteSpace(txtDescripcion.Text) || cboEstado.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor, complete todos los campos requeridos.");
@@ -161,11 +161,11 @@ namespace CapaPresentacion
 
             if (txtId.Text == "0")
             {
-                // Llamar al método de la capa de negocio para agregar la nueva categoría
+               
                 if (negocioCategoria.AgregarCategoria(categoria))
                 {
                     MessageBox.Show("La categoría se ha agregado correctamente.");
-                    // Puedes realizar acciones adicionales, como limpiar los campos del formulario.
+                    
                     limpiar();
                     ActualizarDataGridView();
                 }
@@ -183,7 +183,7 @@ namespace CapaPresentacion
                 if (negocioCategoria.EditarCategoria(categoria))
                 {
                     MessageBox.Show("La categoría se ha editado correctamente.");
-                    // Puedes realizar acciones adicionales, como limpiar los campos del formulario.
+                    
                     limpiar();
                     ActualizarDataGridView();
                 }

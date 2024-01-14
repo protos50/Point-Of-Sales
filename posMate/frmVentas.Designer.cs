@@ -70,11 +70,6 @@
             this.txtNombre = new Bunifu.UI.WinForms.BunifuTextBox();
             this.txtPago = new Bunifu.UI.WinForms.BunifuTextBox();
             this.dgvData = new Bunifu.UI.WinForms.BunifuDataGridView();
-            this.txtId = new System.Windows.Forms.TextBox();
-            this.idProducto = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.resultadoTotal = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.productoid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DNIcliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +77,11 @@
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.idProducto = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.resultadoTotal = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.bunifuGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
@@ -783,53 +783,6 @@
             this.dgvData.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Maroon;
             this.dgvData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellContentClick);
             // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(83, 0);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(24, 20);
-            this.txtId.TabIndex = 58;
-            this.txtId.Text = "0";
-            this.txtId.Visible = false;
-            // 
-            // idProducto
-            // 
-            this.idProducto.Location = new System.Drawing.Point(7, 2);
-            this.idProducto.Name = "idProducto";
-            this.idProducto.Size = new System.Drawing.Size(24, 20);
-            this.idProducto.TabIndex = 59;
-            this.idProducto.Text = "0";
-            this.idProducto.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(2, 489);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 28);
-            this.label3.TabIndex = 60;
-            this.label3.Text = "Total:";
-            // 
-            // resultadoTotal
-            // 
-            this.resultadoTotal.AutoSize = true;
-            this.resultadoTotal.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultadoTotal.Location = new System.Drawing.Point(69, 489);
-            this.resultadoTotal.Name = "resultadoTotal";
-            this.resultadoTotal.Size = new System.Drawing.Size(0, 28);
-            this.resultadoTotal.TabIndex = 61;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(482, 466);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 16);
-            this.label4.TabIndex = 62;
-            this.label4.Text = "Ingrese monto:";
-            // 
             // productoid
             // 
             this.productoid.HeaderText = "productoid";
@@ -879,6 +832,53 @@
             this.Eliminar.MinimumWidth = 25;
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.ReadOnly = true;
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(83, 0);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(24, 20);
+            this.txtId.TabIndex = 58;
+            this.txtId.Text = "0";
+            this.txtId.Visible = false;
+            // 
+            // idProducto
+            // 
+            this.idProducto.Location = new System.Drawing.Point(7, 2);
+            this.idProducto.Name = "idProducto";
+            this.idProducto.Size = new System.Drawing.Size(24, 20);
+            this.idProducto.TabIndex = 59;
+            this.idProducto.Text = "0";
+            this.idProducto.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(2, 489);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 28);
+            this.label3.TabIndex = 60;
+            this.label3.Text = "Total:";
+            // 
+            // resultadoTotal
+            // 
+            this.resultadoTotal.AutoSize = true;
+            this.resultadoTotal.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultadoTotal.Location = new System.Drawing.Point(69, 489);
+            this.resultadoTotal.Name = "resultadoTotal";
+            this.resultadoTotal.Size = new System.Drawing.Size(0, 28);
+            this.resultadoTotal.TabIndex = 61;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(482, 466);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 16);
+            this.label4.TabIndex = 62;
+            this.label4.Text = "Ingrese monto:";
             // 
             // frmVentas
             // 

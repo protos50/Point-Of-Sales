@@ -44,7 +44,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Categoria>();
                 }
             }
@@ -70,7 +70,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -96,7 +96,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                   
                     return false;
                 }
             }
@@ -131,15 +131,14 @@ namespace CapaDatos
                         }
                         else
                         {
-                            // Si no se encuentra la categoría con el ID especificado, puedes manejarlo de acuerdo a tus necesidades.
-                            // Puedes lanzar una excepción o devolver un valor nulo, dependiendo de tu lógica.
+                            
                             return null;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí (puedes registrar la excepción o lanzar una excepción personalizada)
+                    
                     return null;
                 }
             }
@@ -185,7 +184,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí (puedes registrar la excepción o lanzar una excepción personalizada)
+                    
                     return new List<Categoria>();
                 }
             }

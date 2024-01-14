@@ -42,6 +42,8 @@ namespace CapaPresentacion
 
         private void frmVentas_Load(object sender, EventArgs e)
         {
+
+            //La fecha siempre la actual
             dtpFecha.Value = DateTime.Now;
             verificarCheck();
 
@@ -49,7 +51,11 @@ namespace CapaPresentacion
             List <Producto> listaProducto = new CN_Producto().ObtenerProductos();
             foreach (var producto in listaProducto)
             {
-                cboProducto.Items.Add(new OpcionCombo() { Valor = producto.IdProducto, Texto = producto.Nombre });
+                if(producto.Estado != false)
+                {
+                    cboProducto.Items.Add(new OpcionCombo() { Valor = producto.IdProducto, Texto = producto.Nombre });
+                }
+               
             }
             cboProducto.DisplayMember = "Texto";
             cboProducto.ValueMember = "Valor";
@@ -59,11 +65,15 @@ namespace CapaPresentacion
 
         private void verificarCheck()
         {
+            //Metodo para tengamos que primero cargar dni del cliente
+            //si hay mas de un producto en el carrito podemos comprar
             if (carrito.Count > 0)
             {
 
                 btnConfirmarCompra.Enabled = true;
                 btnConfirmarCompra.BackColor = Color.Green;
+
+
             }
             else
             {
@@ -89,6 +99,8 @@ namespace CapaPresentacion
             txtCantidad.Enabled = false;
             txtPago.Enabled = false;
             cboProducto.Enabled = false;
+            montoTotal = 0;
+            resultadoTotal.Text = montoTotal.ToString("C");
         }
 
         private void verifiado()
@@ -115,9 +127,14 @@ namespace CapaPresentacion
                 return;
             }
 
+            //Se verifica
             verifiado();
+
             CN_Cliente negocioCliente = new CN_Cliente();
+
             int dni = int.Parse(txtDNII.Text);
+
+            //Buscamos el cliente por su dni, si existe se rellenan los txt con sus datos, evitamos que hayan registros repetidos en la bd
             Cliente clienteCargado = negocioCliente.BuscarClientePorDNI(dni);
             if(clienteCargado != null)
             {
@@ -138,6 +155,7 @@ namespace CapaPresentacion
             }
             else
             {
+                //Si no existe en la bd creamos
                 MessageBox.Show("Cliente inexistente, cargue sus datos");
                 limpiarVerdificado();
                 
@@ -177,6 +195,7 @@ namespace CapaPresentacion
             };
 
             negocioCliente.AgregarCliente(nuevoCliente);
+
 
             if (txtId.Text == "0")
             {
@@ -338,6 +357,7 @@ namespace CapaPresentacion
 
                         string PaginaHTML_Texto = Properties.Resources.plantilla.ToString();
 
+                        PaginaHTML_Texto = PaginaHTML_Texto.Replace("@TITULO", "Factura" + " " + txtApellido.Text + " " + txtNombre.Text + " " + "Compra N" + idVentaFactura.ToString());
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", txtApellido.Text + " " + txtNombre.Text);
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@DOCUMENTO", txtDNII.Text);
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy"));
@@ -381,10 +401,14 @@ namespace CapaPresentacion
                         }
                     }
 
+                    
+
                     MessageBox.Show("Venta confirmada con éxito.");
                     dgvData.Rows.Clear();
                     carrito.Clear();
-                    resultadoTotal.Text = " ";
+
+                    
+
                     verificarCheck();
                 }
             }
@@ -395,6 +419,8 @@ namespace CapaPresentacion
 
         }
 
+
+        //Eliminar
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             CN_Producto cnProducto = new CN_Producto();

@@ -32,7 +32,7 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                // Manejar excepciones o propagarlas según sea necesario
+               
                 throw ex;
             }
         }
