@@ -44,7 +44,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Categoria>();
                 }
             }
@@ -70,7 +70,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -96,8 +96,96 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                   
                     return false;
+                }
+            }
+        }
+
+        public Categoria ObtenerCategoriaPorId(int idCategoria)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string query = "SELECT IdCategoria, Descripcion, Estado " +
+                                   "FROM CATEGORIA " +
+                                   "WHERE IdCategoria = @IdCategoria";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@IdCategoria", idCategoria);
+                    cmd.CommandType = CommandType.Text;
+                    con.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Categoria categoria = new Categoria
+                            {
+                                IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
+                                Descripcion = reader["Descripcion"].ToString(),
+                                estado = Convert.ToBoolean(reader["Estado"])
+                            };
+                            return categoria;
+                        }
+                        else
+                        {
+                            
+                            return null;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    return null;
+                }
+            }
+        }
+
+        public List<Categoria> ObtenerCategoriasMasVendidas(int topN, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string query = "SELECT TOP (@TopN) c.IdCategoria, SUM(dv.Cantidad) AS TotalVendido " +
+                                   "FROM CATEGORIA c " +
+                                   "INNER JOIN PRODUCTO p ON c.IdCategoria = p.IdCategoria " +
+                                   "INNER JOIN DETALLE_VENTA dv ON p.IdProducto = dv.IdProducto " +
+                                   "WHERE dv.FechaRegistro BETWEEN @FechaDesde AND @FechaHasta " +
+                                   "GROUP BY c.IdCategoria " +
+                                   "ORDER BY TotalVendido DESC";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@TopN", topN);
+                    cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
+                    cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+                    cmd.CommandType = CommandType.Text;
+                    con.Open();
+
+                    List<Categoria> categoriasMasVendidas = new List<Categoria>();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int idCategoria = Convert.ToInt32(reader["IdCategoria"]);
+                            Categoria categoria = ObtenerCategoriaPorId(idCategoria);
+                            if (categoria != null)
+                            {
+                                categoriasMasVendidas.Add(categoria);
+                            }
+                        }
+                    }
+
+                    return categoriasMasVendidas;
+                }
+                catch (Exception ex)
+                {
+                    
+                    return new List<Categoria>();
                 }
             }
         }

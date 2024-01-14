@@ -289,6 +289,12 @@
     <Compile Include="frmProductos.Designer.cs">
       <DependentUpon>frmProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmProductosMasVendidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductosMasVendidos.Designer.cs">
+      <DependentUpon>frmProductosMasVendidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,12 @@
     </Compile>
     <Compile Include="frmReportes.Designer.cs">
       <DependentUpon>frmReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmResumenFinanciero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResumenFinanciero.Designer.cs">
+      <DependentUpon>frmResumenFinanciero.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUsuarios.cs">
       <SubType>Form</SubType>
@@ -319,11 +331,29 @@
     <Compile Include="frmVerCompras.Designer.cs">
       <DependentUpon>frmVerCompras.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVerGananciasVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVerGananciasVendedor.Designer.cs">
+      <DependentUpon>frmVerGananciasVendedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVerStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVerStock.Designer.cs">
+      <DependentUpon>frmVerStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVerVentas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmVerVentas.Designer.cs">
       <DependentUpon>frmVerVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVerVentasVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVerVentasVendedor.Designer.cs">
+      <DependentUpon>frmVerVentasVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -336,12 +366,6 @@
     </Compile>
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
-    </Compile>
-    <Compile Include="opcionCompra.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="opcionCompra.Designer.cs">
-      <DependentUpon>opcionCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -357,11 +381,11 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Utilidades\OpcionCombo.cs" />
-    <Compile Include="opcionVenta.cs">
+    <Compile Include="verCategoriaMasVendidas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="opcionVenta.Designer.cs">
-      <DependentUpon>opcionVenta.cs</DependentUpon>
+    <Compile Include="verCategoriaMasVendidas.Designer.cs">
+      <DependentUpon>verCategoriaMasVendidas.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -381,11 +405,17 @@
     <EmbeddedResource Include="frmProductos.resx">
       <DependentUpon>frmProductos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmProductosMasVendidos.resx">
+      <DependentUpon>frmProductosMasVendidos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProveedores.resx">
       <DependentUpon>frmProveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportes.resx">
       <DependentUpon>frmReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResumenFinanciero.resx">
+      <DependentUpon>frmResumenFinanciero.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUsuarios.resx">
       <DependentUpon>frmUsuarios.cs</DependentUpon>
@@ -396,20 +426,23 @@
     <EmbeddedResource Include="frmVerCompras.resx">
       <DependentUpon>frmVerCompras.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmVerGananciasVendedor.resx">
+      <DependentUpon>frmVerGananciasVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVerStock.resx">
+      <DependentUpon>frmVerStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVerVentas.resx">
       <DependentUpon>frmVerVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVerVentasVendedor.resx">
+      <DependentUpon>frmVerVentasVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="opcionCompra.resx">
-      <DependentUpon>opcionCompra.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="opcionVenta.resx">
-      <DependentUpon>opcionVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -423,6 +456,9 @@
     <EmbeddedResource Include="Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verCategoriaMasVendidas.resx">
+      <DependentUpon>verCategoriaMasVendidas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DB_PosnetDataSet.xsc">
       <DependentUpon>DB_PosnetDataSet.xsd</DependentUpon>

@@ -11,20 +11,24 @@ namespace CapaNegocio
     public class CN_Compra
     {
         private CD_Compra ocd_compra = new CD_Compra();
-        public List<Compra> ObtenerCompras()
+        public List<Compra> ObtenerCompras(int? IdUsuario = null)
         {
-            return ocd_compra.ObtenerCompras();
+            return ocd_compra.ObtenerCompras(IdUsuario);
         }
 
         public bool AgregarCompra(Compra compra)
-        {
-            // Puedes agregar validaciones u otra lógica de negocio aquí antes de llamar al método en la capa de datos.
+        {          
             return ocd_compra.AgregarCompra(compra);
         }
 
         public int obtenerUltimoIdCompra()
         {
             return ocd_compra.ObtenerUltimoIDCompra();
+        }
+
+        public decimal CalcularMontoTotalComprasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return ocd_compra.CalcularMontoTotalComprasPorFecha(fechaDesde, fechaHasta);
         }
     }
 }

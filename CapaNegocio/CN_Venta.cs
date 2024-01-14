@@ -12,10 +12,11 @@ namespace CapaNegocio
     {
         private CD_Venta ocd_venta = new CD_Venta();
 
-        public List<Venta> ObtenerVentas()
+        public List<Venta> ObtenerVentas(int? IdUsuario = null)
         {
-            return ocd_venta.ObtenerVentas();
+            return ocd_venta.ObtenerVentas(IdUsuario);
         }
+
 
         public bool AgregarVenta(Venta venta)
         {
@@ -26,6 +27,21 @@ namespace CapaNegocio
         public int ObtenerUltimoIDVenta()
         {
             return ocd_venta.ObtenerUltimoIDVenta();
+        }
+
+        public List<Venta> ObtenerVentasPorIdUsuario(int usuario)
+        {
+            return ocd_venta.ObtenerVentasPorIdUsuario(usuario);
+        }
+
+        public List<Venta> ObtenerVentasPorIntervaloDeTiempo(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return ocd_venta.ObtenerVentasPorIntervaloDeTiempo(fechaDesde, fechaHasta);
+        }
+
+        public decimal CalcularMontoTotalVentasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return ocd_venta.CalcularMontoTotalVentasPorFecha(fechaDesde,fechaHasta);
         }
     }
 }

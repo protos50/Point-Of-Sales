@@ -55,9 +55,9 @@ namespace CapaDatos
                         }
                     }
                 }
-                catch (Exception ex)    
+                catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Producto>();
                 }
             }
@@ -92,7 +92,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -129,13 +129,13 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
         }
 
-        
+
         public Producto ObtenerProductoPorCodigoProducto(string codigoProducto)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -176,12 +176,12 @@ namespace CapaDatos
                         }
                     }
 
-                    // Si no se encuentra el producto, puedes devolver null o manejarlo de otra forma.
+                    
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return null;
                 }
             }
@@ -233,7 +233,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -279,16 +279,63 @@ namespace CapaDatos
                         }
                     }
 
-                    // Si no se encuentra el producto, puedes devolver null o manejarlo de otra forma.
+                   
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return null;
                 }
             }
         }
+
+        public List<Producto> ObtenerProductosMasVendidos(int topN, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    string query = "SELECT TOP (@TopN) p.IdProducto, SUM(dv.Cantidad) AS TotalVendido " +
+                                   "FROM PRODUCTO p " +
+                                   "INNER JOIN DETALLE_VENTA dv ON p.IdProducto = dv.IdProducto " +
+                                   "WHERE dv.FechaRegistro BETWEEN @FechaDesde AND @FechaHasta " +
+                                   "GROUP BY p.IdProducto " +
+                                   "ORDER BY TotalVendido DESC";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@TopN", topN);
+                    cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
+                    cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+                    cmd.CommandType = CommandType.Text;
+                    con.Open();
+
+                    List<Producto> productosMasVendidos = new List<Producto>();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int idProducto = Convert.ToInt32(reader["IdProducto"]);
+                            Producto producto = ObtenerProductoPorId(idProducto);
+                            if (producto != null)
+                            {
+                                productosMasVendidos.Add(producto);
+                            }
+                        }
+                    }
+
+                    return productosMasVendidos;
+                }
+                catch (Exception ex)
+                {
+                   
+                    return new List<Producto>();
+                }
+            }
+        }
+
+
 
     }
 }

@@ -258,11 +258,9 @@ C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmProveedores.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmReportes.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVentas.resources
-C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.opcionCompra.resources
 C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerCompras.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerCompras.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.opcionCompra.resources
-C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.opcionVenta.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.opcionVenta.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.FormGananciasPorCategoria.resources
 C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\bin\Debug\SqlServerTypes\x64\msvcr120.dll
@@ -285,3 +283,12 @@ C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\bin\Debu
 C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.FormGananciasPorCategoria.resources
 C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerVentas.resources
 C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\bin\Debug\itextsharp.xml
+C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\bin\Debug\itextsharp.xml
+C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerStock.resources
+C:\Users\Franck50\Documents\Proyecto Taller de  Programacion\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerGananciasVendedor.resources
+C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerGananciasVendedor.resources
+C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerStock.resources
+C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmVerVentasVendedor.resources
+C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmProductosMasVendidos.resources
+C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.verCategoriaMasVendidas.resources
+C:\Users\Gonza\Desktop\Nueva carpeta\Trabajo_Integrador_Grupo11\posMate\obj\Debug\CapaPresentacion.frmResumenFinanciero.resources

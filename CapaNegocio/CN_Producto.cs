@@ -18,8 +18,7 @@ namespace CapaNegocio
         }
 
         public bool AgregarProducto(Producto producto)
-        {
-            
+        {           
             return ocd_producto.AgregarProducto(producto);
         }
 
@@ -29,28 +28,31 @@ namespace CapaNegocio
         }
 
         public Producto ObtenerProductoPorCodigoProducto(string codigoProducto)
-        {
-            
+        {     
             return ocd_producto.ObtenerProductoPorCodigoProducto(codigoProducto);
         }
 
         public Producto ObtenerProductoPorId(int id)
         {
-
             return ocd_producto.ObtenerProductoPorId(id);
         }
 
         public bool ActualizarStockProducto(int productoId, int cantidad)
-        {
-            // Aquí puedes agregar lógica adicional si es necesario antes de llamar a la capa de datos.
+        {            
             return ocd_producto.ActualizarStockProducto(productoId, cantidad);
         }
 
         public bool ActualizarStockProductoVenta(int productoId, int cantidad)
         {
-            // Aquí puedes agregar lógica adicional si es necesario antes de llamar a la capa de datos.
             return ocd_producto.ActualizarStockProductoVenta(productoId, cantidad);
         }
+
+        public List<Producto> ObtenerProductoMasVendido(int topN, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            return ocd_producto.ObtenerProductosMasVendidos(topN, FechaDesde, FechaHasta);
+        }
+
+
 
 
     }

@@ -55,7 +55,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<DetalleCompra>();
                 }
             }
@@ -87,7 +87,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }

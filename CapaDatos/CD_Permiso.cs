@@ -51,7 +51,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Permiso>();
                 }
             }

@@ -16,14 +16,23 @@ namespace CapaNegocio
 
         public bool AgregarCategoria(Categoria categoria)
         {
-            // Puedes agregar validaciones u otra lógica de negocio aquí antes de llamar al método en la capa de datos.
+            
             return ocd_categoria.AgregarCategoria(categoria);
         }
 
         public bool EditarCategoria(Categoria categoria)
         {
-            // Puedes agregar validaciones u otra lógica de negocio aquí antes de llamar al método en la capa de datos.
             return ocd_categoria.EditarCategoria(categoria);
+        }
+
+        public Categoria ObtenerProductoPorId(int id)
+        {
+            return ocd_categoria.ObtenerCategoriaPorId(id);
+        }
+
+        public List<Categoria> ObtenerCategoriasMasVendidas(int topN, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            return ocd_categoria.ObtenerCategoriasMasVendidas(topN, FechaDesde, FechaHasta);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CapaDatos
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
 
-        public List<Venta> ObtenerVentas()
+        public List<Venta> ObtenerVentas(int? IdUsuario = null)
         {
             List<Venta> lista = new List<Venta>();
 
@@ -21,12 +21,19 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente,v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
-                                                           "FROM Venta v " +
-                                                           "INNER JOIN USUARIO u ON v.IdUsuario = u.IdUsuario " +
-                                                           "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente", con))
+                    
+                    using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.IdUsuario, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente,v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
+                                                  "FROM Venta v " +
+                                                  "INNER JOIN USUARIO u ON v.IdUsuario = u.IdUsuario " +
+                                                  "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente" +
+                                                  (IdUsuario.HasValue ? " WHERE v.IdUsuario = @IdUsuario" : ""), con))
                     {
                         cmd.CommandType = CommandType.Text;
+
+                        if (IdUsuario.HasValue)
+                        {
+                            cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario.Value);
+                        }
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -37,6 +44,7 @@ namespace CapaDatos
                                     IdVenta = Convert.ToInt32(reader["IdVenta"]),
                                     oUsuario = new Usuario
                                     {
+                                        IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
                                         Nombre = reader["NombreUsuario"].ToString()
                                     },
                                     oCliente = new Cliente
@@ -55,7 +63,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Venta>();
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
@@ -89,7 +97,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
             }
@@ -118,11 +126,152 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                 }
             }
 
             return ultimoID;
+        }
+
+        public List<Venta> ObtenerVentasPorIdUsuario(int idUsuario)
+        {
+            List<Venta> ventasUsuario = new List<Venta>();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.IdUsuario, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente, v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
+                                                          "FROM Venta v " +
+                                                          "INNER JOIN Usuario u ON v.IdUsuario = u.IdUsuario " +
+                                                          "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente " +
+                                                          "WHERE u.IdUsuario = @IdUsuario", con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ventasUsuario.Add(new Venta
+                                {
+                                    IdVenta = Convert.ToInt32(reader["IdVenta"]),
+                                    oUsuario = new Usuario
+                                    {
+                                        IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
+                                        Nombre = reader["NombreUsuario"].ToString()
+                                    },
+                                    oCliente = new Cliente
+                                    {
+                                        Nombre = reader["NombreCliente"].ToString()
+                                    },
+                                    MontoPago = Convert.ToDecimal(reader["MontoPago"]),
+                                    MontoCambio = Convert.ToDecimal(reader["MontoCambio"]),
+                                    MontoTotal = Convert.ToDecimal(reader["MontoTotal"]),
+                                    FechaRegistro = (DateTime)(reader["FechaRegistro"] as DateTime?)
+                                });
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    MessageBox.Show("Se produjo un error: " + ex.Message);
+                }
+            }
+
+            return ventasUsuario;
+        }
+
+        public List<Venta> ObtenerVentasPorIntervaloDeTiempo(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            List<Venta> ventasFiltradas = new List<Venta>();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.IdUsuario, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente, v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
+                                                          "FROM Venta v " +
+                                                          "INNER JOIN Usuario u ON v.IdUsuario = u.IdUsuario " +
+                                                          "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente " +
+                                                          "WHERE v.FechaRegistro >= @FechaDesde AND v.FechaRegistro <= @FechaHasta", con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
+                        cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ventasFiltradas.Add(new Venta
+                                {
+                                    IdVenta = Convert.ToInt32(reader["IdVenta"]),
+                                    oUsuario = new Usuario
+                                    {
+                                        IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
+                                        Nombre = reader["NombreUsuario"].ToString()
+                                    },
+                                    oCliente = new Cliente
+                                    {
+                                        Nombre = reader["NombreCliente"].ToString()
+                                    },
+                                    MontoPago = Convert.ToDecimal(reader["MontoPago"]),
+                                    MontoCambio = Convert.ToDecimal(reader["MontoCambio"]),
+                                    MontoTotal = Convert.ToDecimal(reader["MontoTotal"]),
+                                    FechaRegistro = (DateTime)(reader["FechaRegistro"] as DateTime?)
+                                });
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    MessageBox.Show("Se produjo un error: " + ex.Message);
+                }
+            }
+
+            return ventasFiltradas;
+        }
+
+        public decimal CalcularMontoTotalVentasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            decimal montoTotal = 0;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT SUM(MontoTotal) AS MontoTotal FROM Venta " +
+                                                          "WHERE FechaRegistro >= @FechaDesde AND FechaRegistro <= @FechaHasta", con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
+                        cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            montoTotal = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    MessageBox.Show("Se produjo un error: " + ex.Message);
+                }
+            }
+
+            return montoTotal;
         }
     }
 }

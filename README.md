@@ -1,3 +1,2 @@
-# postMate-.grupo11. Version 1.0
-Proyecto entregable del desarrollo de un software de punto de venta, para la materia taller de programación 2 de la carrera de Licenciaturas en Sistemas de la Informacion de la  Univerdidad Nacional del Nordeste.
-Utilizacion del UI framework Windows Forms .NET con C#
+# postMate-.grupo11. Version 3.0
+This project is the result of the work done to develop a Point of Sale software for the Programming Workshop 2 course of the Information Systems bachelor degree at the Universidad Nacional del Nordeste.

@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVentas));
-            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties17 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
-            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties18 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
-            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties19 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
-            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties20 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties1 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties2 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties3 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
@@ -49,6 +45,10 @@
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties14 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties15 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties16 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
+            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties17 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
+            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties18 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
+            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties19 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
+            Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties20 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -60,7 +60,6 @@
             this.btnCarrito = new FontAwesome.Sharp.IconButton();
             this.dtpFecha = new Bunifu.UI.WinForms.BunifuDatePicker();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.txtPago = new Bunifu.UI.WinForms.BunifuTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnlimpiarCampos = new FontAwesome.Sharp.IconButton();
@@ -69,12 +68,15 @@
             this.txtDNII = new Bunifu.UI.WinForms.BunifuTextBox();
             this.txtApellido = new Bunifu.UI.WinForms.BunifuTextBox();
             this.txtNombre = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.txtPago = new Bunifu.UI.WinForms.BunifuTextBox();
             this.dgvData = new Bunifu.UI.WinForms.BunifuDataGridView();
+            this.productoid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DNIcliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtId = new System.Windows.Forms.TextBox();
             this.idProducto = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -261,82 +263,6 @@
             this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton1.UseVisualStyleBackColor = false;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
-            // 
-            // txtPago
-            // 
-            this.txtPago.AcceptsReturn = false;
-            this.txtPago.AcceptsTab = false;
-            this.txtPago.AnimationSpeed = 200;
-            this.txtPago.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtPago.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtPago.AutoSizeHeight = true;
-            this.txtPago.BackColor = System.Drawing.Color.Transparent;
-            this.txtPago.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("txtPago.BackgroundImage")));
-            this.txtPago.BorderColorActive = System.Drawing.Color.DodgerBlue;
-            this.txtPago.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.txtPago.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
-            this.txtPago.BorderColorIdle = System.Drawing.Color.Silver;
-            this.txtPago.BorderRadius = 1;
-            this.txtPago.BorderThickness = 1;
-            this.txtPago.CharacterCase = Bunifu.UI.WinForms.BunifuTextBox.CharacterCases.Normal;
-            this.txtPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtPago.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPago.DefaultFont = new System.Drawing.Font("Segoe UI", 9.25F);
-            this.txtPago.DefaultText = "";
-            this.txtPago.FillColor = System.Drawing.Color.White;
-            this.txtPago.HideSelection = true;
-            this.txtPago.IconLeft = null;
-            this.txtPago.IconLeftCursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPago.IconPadding = 10;
-            this.txtPago.IconRight = null;
-            this.txtPago.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPago.Lines = new string[0];
-            this.txtPago.Location = new System.Drawing.Point(480, 485);
-            this.txtPago.MaxLength = 32767;
-            this.txtPago.MinimumSize = new System.Drawing.Size(1, 1);
-            this.txtPago.Modified = false;
-            this.txtPago.Multiline = false;
-            this.txtPago.Name = "txtPago";
-            stateProperties17.BorderColor = System.Drawing.Color.DodgerBlue;
-            stateProperties17.FillColor = System.Drawing.Color.Empty;
-            stateProperties17.ForeColor = System.Drawing.Color.Empty;
-            stateProperties17.PlaceholderForeColor = System.Drawing.Color.Empty;
-            this.txtPago.OnActiveState = stateProperties17;
-            stateProperties18.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            stateProperties18.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            stateProperties18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            stateProperties18.PlaceholderForeColor = System.Drawing.Color.DarkGray;
-            this.txtPago.OnDisabledState = stateProperties18;
-            stateProperties19.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
-            stateProperties19.FillColor = System.Drawing.Color.Empty;
-            stateProperties19.ForeColor = System.Drawing.Color.Empty;
-            stateProperties19.PlaceholderForeColor = System.Drawing.Color.Empty;
-            this.txtPago.OnHoverState = stateProperties19;
-            stateProperties20.BorderColor = System.Drawing.Color.Silver;
-            stateProperties20.FillColor = System.Drawing.Color.White;
-            stateProperties20.ForeColor = System.Drawing.Color.Empty;
-            stateProperties20.PlaceholderForeColor = System.Drawing.Color.Empty;
-            this.txtPago.OnIdleState = stateProperties20;
-            this.txtPago.Padding = new System.Windows.Forms.Padding(3);
-            this.txtPago.PasswordChar = '\0';
-            this.txtPago.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtPago.PlaceholderText = "Monto pago";
-            this.txtPago.ReadOnly = false;
-            this.txtPago.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtPago.SelectedText = "";
-            this.txtPago.SelectionLength = 0;
-            this.txtPago.SelectionStart = 0;
-            this.txtPago.ShortcutsEnabled = true;
-            this.txtPago.Size = new System.Drawing.Size(204, 32);
-            this.txtPago.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
-            this.txtPago.TabIndex = 49;
-            this.txtPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtPago.TextMarginBottom = 0;
-            this.txtPago.TextMarginLeft = 3;
-            this.txtPago.TextMarginTop = 1;
-            this.txtPago.TextPlaceholder = "Monto pago";
-            this.txtPago.UseSystemPasswordChar = false;
-            this.txtPago.WordWrap = true;
             // 
             // label2
             // 
@@ -701,6 +627,82 @@
             this.txtNombre.UseSystemPasswordChar = false;
             this.txtNombre.WordWrap = true;
             // 
+            // txtPago
+            // 
+            this.txtPago.AcceptsReturn = false;
+            this.txtPago.AcceptsTab = false;
+            this.txtPago.AnimationSpeed = 200;
+            this.txtPago.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtPago.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtPago.AutoSizeHeight = true;
+            this.txtPago.BackColor = System.Drawing.Color.Transparent;
+            this.txtPago.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("txtPago.BackgroundImage")));
+            this.txtPago.BorderColorActive = System.Drawing.Color.DodgerBlue;
+            this.txtPago.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.txtPago.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
+            this.txtPago.BorderColorIdle = System.Drawing.Color.Silver;
+            this.txtPago.BorderRadius = 1;
+            this.txtPago.BorderThickness = 1;
+            this.txtPago.CharacterCase = Bunifu.UI.WinForms.BunifuTextBox.CharacterCases.Normal;
+            this.txtPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtPago.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPago.DefaultFont = new System.Drawing.Font("Segoe UI", 9.25F);
+            this.txtPago.DefaultText = "";
+            this.txtPago.FillColor = System.Drawing.Color.White;
+            this.txtPago.HideSelection = true;
+            this.txtPago.IconLeft = null;
+            this.txtPago.IconLeftCursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPago.IconPadding = 10;
+            this.txtPago.IconRight = null;
+            this.txtPago.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPago.Lines = new string[0];
+            this.txtPago.Location = new System.Drawing.Point(480, 485);
+            this.txtPago.MaxLength = 32767;
+            this.txtPago.MinimumSize = new System.Drawing.Size(1, 1);
+            this.txtPago.Modified = false;
+            this.txtPago.Multiline = false;
+            this.txtPago.Name = "txtPago";
+            stateProperties17.BorderColor = System.Drawing.Color.DodgerBlue;
+            stateProperties17.FillColor = System.Drawing.Color.Empty;
+            stateProperties17.ForeColor = System.Drawing.Color.Empty;
+            stateProperties17.PlaceholderForeColor = System.Drawing.Color.Empty;
+            this.txtPago.OnActiveState = stateProperties17;
+            stateProperties18.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            stateProperties18.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            stateProperties18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            stateProperties18.PlaceholderForeColor = System.Drawing.Color.DarkGray;
+            this.txtPago.OnDisabledState = stateProperties18;
+            stateProperties19.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
+            stateProperties19.FillColor = System.Drawing.Color.Empty;
+            stateProperties19.ForeColor = System.Drawing.Color.Empty;
+            stateProperties19.PlaceholderForeColor = System.Drawing.Color.Empty;
+            this.txtPago.OnHoverState = stateProperties19;
+            stateProperties20.BorderColor = System.Drawing.Color.Silver;
+            stateProperties20.FillColor = System.Drawing.Color.White;
+            stateProperties20.ForeColor = System.Drawing.Color.Empty;
+            stateProperties20.PlaceholderForeColor = System.Drawing.Color.Empty;
+            this.txtPago.OnIdleState = stateProperties20;
+            this.txtPago.Padding = new System.Windows.Forms.Padding(3);
+            this.txtPago.PasswordChar = '\0';
+            this.txtPago.PlaceholderForeColor = System.Drawing.Color.Silver;
+            this.txtPago.PlaceholderText = "Monto pago";
+            this.txtPago.ReadOnly = false;
+            this.txtPago.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtPago.SelectedText = "";
+            this.txtPago.SelectionLength = 0;
+            this.txtPago.SelectionStart = 0;
+            this.txtPago.ShortcutsEnabled = true;
+            this.txtPago.Size = new System.Drawing.Size(204, 32);
+            this.txtPago.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
+            this.txtPago.TabIndex = 49;
+            this.txtPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtPago.TextMarginBottom = 0;
+            this.txtPago.TextMarginLeft = 3;
+            this.txtPago.TextMarginTop = 1;
+            this.txtPago.TextPlaceholder = "Monto pago";
+            this.txtPago.UseSystemPasswordChar = false;
+            this.txtPago.WordWrap = true;
+            // 
             // dgvData
             // 
             this.dgvData.AllowCustomTheming = false;
@@ -724,11 +726,13 @@
             this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvData.ColumnHeadersHeight = 40;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.productoid,
             this.DNIcliente,
             this.Producto,
             this.Precio,
             this.Cantidad,
-            this.Total});
+            this.Total,
+            this.Eliminar});
             this.dgvData.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.dgvData.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.dgvData.CurrentTheme.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Black;
@@ -777,36 +781,57 @@
             this.dgvData.Size = new System.Drawing.Size(687, 405);
             this.dgvData.TabIndex = 47;
             this.dgvData.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Maroon;
+            this.dgvData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellContentClick);
+            // 
+            // productoid
+            // 
+            this.productoid.HeaderText = "productoid";
+            this.productoid.Name = "productoid";
+            this.productoid.ReadOnly = true;
+            this.productoid.Visible = false;
             // 
             // DNIcliente
             // 
+            this.DNIcliente.FillWeight = 104.7716F;
             this.DNIcliente.HeaderText = "DNIcliente";
             this.DNIcliente.Name = "DNIcliente";
             this.DNIcliente.ReadOnly = true;
             // 
             // Producto
             // 
+            this.Producto.FillWeight = 104.7716F;
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
             this.Producto.ReadOnly = true;
             // 
             // Precio
             // 
+            this.Precio.FillWeight = 104.7716F;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
             // 
             // Cantidad
             // 
+            this.Cantidad.FillWeight = 104.7716F;
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
             // 
             // Total
             // 
+            this.Total.FillWeight = 104.7716F;
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.FillWeight = 76.14214F;
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.MinimumWidth = 25;
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.ReadOnly = true;
             // 
             // txtId
             // 
@@ -896,11 +921,6 @@
         private System.Windows.Forms.Label label2;
         private Bunifu.UI.WinForms.BunifuTextBox txtPago;
         private Bunifu.UI.WinForms.BunifuDataGridView dgvData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DNIcliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private FontAwesome.Sharp.IconButton iconButton1;
         private System.Windows.Forms.TextBox txtId;
         private Bunifu.UI.WinForms.BunifuDatePicker dtpFecha;
@@ -910,5 +930,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label resultadoTotal;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productoid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DNIcliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
     }
 }

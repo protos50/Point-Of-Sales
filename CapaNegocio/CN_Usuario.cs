@@ -29,8 +29,13 @@ namespace CapaNegocio
         {
                 return ocd_usuario.Editar(obj, out Mensaje);
         }
-           
-     }
- }
+
+        public Usuario ObtenerUsuarioPorNombre(string nombre)
+        {
+            return ocd_usuario.ObtenerUsuarioPorNombre(nombre);
+        }
+
+    }
+}
     
 

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using System.Windows.Forms;
 
 namespace CapaDatos
 {
     public class CD_Compra
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
-        public List<Compra> ObtenerCompras()
+        public List<Compra> ObtenerCompras(int? IdUsuario = null)
         {
             List<Compra> lista = new List<Compra>();
 
@@ -24,9 +25,16 @@ namespace CapaDatos
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand("SELECT c.IdCompra, u.Nombre AS NombreUsuario, p.Nombre AS NombreProveedor, c.MontoTotal, c.FechaRegistro FROM COMPRA c " +
                                                            "INNER JOIN USUARIO u ON c.IdUsuario = u.IdUsuario " +
-                                                           "INNER JOIN PROVEEDOR p ON c.IdProveedor = p.IdProveedor", con))
+                                                           "INNER JOIN PROVEEDOR p ON c.IdProveedor = p.IdProveedor" +
+                                                           (IdUsuario.HasValue ? " WHERE c.IdUsuario = @IdUsuario" : ""), con))
+
                     {
                         cmd.CommandType = CommandType.Text;
+
+                        if (IdUsuario.HasValue)
+                        {
+                            cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario.Value);
+                        }
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -52,7 +60,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     lista = new List<Compra>();
                 }
             }
@@ -81,7 +89,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                     return false;
                 }
 
@@ -111,11 +119,45 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores aquí
+                    
                 }
             }
 
             return ultimoID;
+        }
+
+        public decimal CalcularMontoTotalComprasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            decimal montoTotal = 0;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT SUM(MontoTotal) AS MontoTotal FROM COMPRA " +
+                                                          "WHERE FechaRegistro >= @FechaDesde AND FechaRegistro <= @FechaHasta", con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
+                        cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            montoTotal = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    MessageBox.Show("Se produjo un error: " + ex.Message);
+                }
+            }
+
+            return montoTotal;
         }
     }
 }

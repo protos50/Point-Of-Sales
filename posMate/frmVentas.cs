@@ -42,6 +42,8 @@ namespace CapaPresentacion
 
         private void frmVentas_Load(object sender, EventArgs e)
         {
+
+            //La fecha siempre la actual
             dtpFecha.Value = DateTime.Now;
             verificarCheck();
 
@@ -49,7 +51,11 @@ namespace CapaPresentacion
             List <Producto> listaProducto = new CN_Producto().ObtenerProductos();
             foreach (var producto in listaProducto)
             {
-                cboProducto.Items.Add(new OpcionCombo() { Valor = producto.IdProducto, Texto = producto.Nombre });
+                if(producto.Estado != false)
+                {
+                    cboProducto.Items.Add(new OpcionCombo() { Valor = producto.IdProducto, Texto = producto.Nombre });
+                }
+               
             }
             cboProducto.DisplayMember = "Texto";
             cboProducto.ValueMember = "Valor";
@@ -59,11 +65,15 @@ namespace CapaPresentacion
 
         private void verificarCheck()
         {
+            //Metodo para tengamos que primero cargar dni del cliente
+            //si hay mas de un producto en el carrito podemos comprar
             if (carrito.Count > 0)
             {
 
                 btnConfirmarCompra.Enabled = true;
                 btnConfirmarCompra.BackColor = Color.Green;
+
+
             }
             else
             {
@@ -89,6 +99,8 @@ namespace CapaPresentacion
             txtCantidad.Enabled = false;
             txtPago.Enabled = false;
             cboProducto.Enabled = false;
+            montoTotal = 0;
+            resultadoTotal.Text = montoTotal.ToString("C");
         }
 
         private void verifiado()
@@ -115,9 +127,14 @@ namespace CapaPresentacion
                 return;
             }
 
+            //Se verifica
             verifiado();
+
             CN_Cliente negocioCliente = new CN_Cliente();
+
             int dni = int.Parse(txtDNII.Text);
+
+            //Buscamos el cliente por su dni, si existe se rellenan los txt con sus datos, evitamos que hayan registros repetidos en la bd
             Cliente clienteCargado = negocioCliente.BuscarClientePorDNI(dni);
             if(clienteCargado != null)
             {
@@ -138,6 +155,7 @@ namespace CapaPresentacion
             }
             else
             {
+                //Si no existe en la bd creamos
                 MessageBox.Show("Cliente inexistente, cargue sus datos");
                 limpiarVerdificado();
                 
@@ -178,6 +196,7 @@ namespace CapaPresentacion
 
             negocioCliente.AgregarCliente(nuevoCliente);
 
+
             if (txtId.Text == "0")
             {
                 int idClienteCreado = negocioCliente.ObtenerIdClientePorDNI(Convert.ToInt32(txtDNII.Text));
@@ -213,12 +232,13 @@ namespace CapaPresentacion
                 // Agregar los datos del producto al DataGridView
                 dgvData.Rows.Add(new object[]
                 {
+                    producto.IdProducto,
                      txtDNII.Text, // DNI del cliente
-                     producto.Nombre, 
-                     producto.PrecioVenta, 
-                     cantidad, 
-                     producto.PrecioVenta * cantidad 
-                });
+                     producto.Nombre,
+                     producto.PrecioVenta,
+                     cantidad,
+                     producto.PrecioVenta * cantidad
+                }); ;
 
                 // Limpiar los campos después de agregar el producto al carrito
                 txtCantidad.Clear();
@@ -311,7 +331,7 @@ namespace CapaPresentacion
                                 PrecioVenta = productoEnCarrito.PrecioVenta,
                                 Cantidad = cantidad,    // Usar la cantidad del DataGridView
                                 Subtotal = subtotal,    // Calcular el subtotal
-                                FechaRegistro = productoEnCarrito.FechaRegistro
+                                FechaRegistro = dtpFecha.Value
                             };
 
                             if (negocioDetalle.AgregarDetalleVenta(detalle))
@@ -327,14 +347,17 @@ namespace CapaPresentacion
 
                     //******FACTURA**********
                     int idVentaFactura = negocioVenta.ObtenerUltimoIDVenta();
+
                     DialogResult result = MessageBox.Show("¿Desea imprimir la factura?", "Imprimir Factura", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         SaveFileDialog savefile = new SaveFileDialog();
-                        savefile.FileName = string.Format("{0}.pdf", DateTime.Now.ToString("ddMMyyyyHHmmss"));
+
+                        savefile.FileName = string.Format("{0}.pdf", DateTime.Now.ToString("ddMMyyyyHHmm"));
 
                         string PaginaHTML_Texto = Properties.Resources.plantilla.ToString();
 
+                        PaginaHTML_Texto = PaginaHTML_Texto.Replace("@TITULO", "Factura" + " " + txtApellido.Text + " " + txtNombre.Text + " " + "Compra N" + idVentaFactura.ToString());
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", txtApellido.Text + " " + txtNombre.Text);
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@DOCUMENTO", txtDNII.Text);
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy"));
@@ -355,7 +378,7 @@ namespace CapaPresentacion
                         PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FILAS", filas);
 
                         // Reemplazar la etiqueta @TOTAL con el monto total de la venta
-                        PaginaHTML_Texto = PaginaHTML_Texto.Replace("@TOTAL", montoTotal.ToString("C"));
+                        PaginaHTML_Texto = PaginaHTML_Texto.Replace("@TOTAL", resultadoTotal.Text);
 
                         if (savefile.ShowDialog() == DialogResult.OK)
                         {
@@ -368,6 +391,7 @@ namespace CapaPresentacion
 
                                 using (StringReader sr = new StringReader(PaginaHTML_Texto))
                                 {
+                                    
                                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                                 }
 
@@ -377,10 +401,14 @@ namespace CapaPresentacion
                         }
                     }
 
+                    
+
                     MessageBox.Show("Venta confirmada con éxito.");
                     dgvData.Rows.Clear();
                     carrito.Clear();
-                    resultadoTotal.Text = " ";
+
+                    
+
                     verificarCheck();
                 }
             }
@@ -390,6 +418,51 @@ namespace CapaPresentacion
         {
 
         }
+
+
+        //Eliminar
+        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CN_Producto cnProducto = new CN_Producto();
+            if (e.ColumnIndex == dgvData.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            {
+                // Obtén el ID del producto que se está eliminando
+                int idProducto = Convert.ToInt32(dgvData.Rows[e.RowIndex].Cells["productoid"].Value);
+
+                // Busca el producto en la lista carrito y elimínalo
+                Producto productoEliminado = carrito.FirstOrDefault(p => p.IdProducto == idProducto);
+                if (productoEliminado != null)
+                {
+                    carrito.Remove(productoEliminado);
+                }
+
+                // Llama a la función de la capa de negocio para actualizar el stock del producto
+                int cantidadEliminada = Convert.ToInt32(dgvData.Rows[e.RowIndex].Cells["Cantidad"].Value);
+                if (cnProducto.ActualizarStockProducto(idProducto, cantidadEliminada))
+                {
+                    // Actualiza el monto total restando el total del producto eliminado
+                    montoTotal -= Convert.ToDecimal(dgvData.Rows[e.RowIndex].Cells["Total"].Value);
+                    resultadoTotal.Text = montoTotal.ToString("C");
+
+                    // Elimina la fila del DataGridView
+                    dgvData.Rows.RemoveAt(e.RowIndex);
+
+                    // Verifica si el carrito está vacío
+                    if (dgvData.Rows.Count == 0)
+                    {
+                        btnConfirmarCompra.Enabled = false;
+                        btnConfirmarCompra.BackColor = SystemColors.Control;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error al actualizar el stock del producto.");
+                }
+            }
+        }
+
+
+
     }
 
 }

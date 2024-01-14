@@ -158,5 +158,41 @@ namespace CapaDatos
 
             return respuesta;
         }
+
+        public Usuario ObtenerUsuarioPorNombre(string nombre)
+        {
+            Usuario usuario = null;
+
+            using (SqlConnection con = new SqlConnection(Conexion.cadena))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE Nombre = @Nombre", con))
+                    {
+                        cmd.Parameters.AddWithValue("@Nombre", nombre);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                usuario = new Usuario()
+                                {
+                                    IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
+                                   
+                                };
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return usuario;
+        }
+
     }
 }
